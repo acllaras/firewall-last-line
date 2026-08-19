@@ -111,12 +111,6 @@ export class GameScene extends Phaser.Scene {
 
   private selectedUnit: string | null = null;
 
-  private pulseButton!: Phaser.GameObjects.Rectangle;
-  private minerButton!: Phaser.GameObjects.Rectangle;
-  private firewallButton!: Phaser.GameObjects.Rectangle;
-  private cryoButton!: Phaser.GameObjects.Rectangle;
-  private teslaButton!: Phaser.GameObjects.Rectangle;
-
   constructor() {
     super('GameScene');
   }
@@ -792,7 +786,7 @@ export class GameScene extends Phaser.Scene {
       .setInteractive({ useHandCursor: true })
       .setDepth(4);
 
-    const pauseIcon = this.add.text(
+    this.add.text(
       1028,
       hudY,
       'Ⅱ',
@@ -840,7 +834,6 @@ export class GameScene extends Phaser.Scene {
   }
 
   private createPulseButton() {
-    this.pulseButton =
       this.createUnitButton(
         147,
         'PULSE',
@@ -852,7 +845,6 @@ export class GameScene extends Phaser.Scene {
   }
 
   private createMinerButton() {
-    this.minerButton =
       this.createUnitButton(
         348,
         'MINER',
@@ -864,7 +856,6 @@ export class GameScene extends Phaser.Scene {
   }
 
   private createFirewallButton() {
-    this.firewallButton =
       this.createUnitButton(
         550,
         'FIREWALL',
@@ -876,7 +867,6 @@ export class GameScene extends Phaser.Scene {
   }
 
   private createCryoButton() {
-    this.cryoButton =
       this.createUnitButton(
         752,
         'CRYO',
@@ -888,7 +878,6 @@ export class GameScene extends Phaser.Scene {
   }
 
   private createTeslaButton() {
-    this.teslaButton =
       this.createUnitButton(
         953,
         'TESLA',
