@@ -3422,7 +3422,8 @@ export class GameScene extends Phaser.Scene {
         145,
         'DEFENSE PROTOCOL',
         {
-          fontSize: '36px',
+          fontFamily: FONT_DISPLAY,
+          fontSize: '32px',
           color: '#38bdf8',
           fontStyle: 'bold'
         }
@@ -3436,6 +3437,7 @@ export class GameScene extends Phaser.Scene {
         190,
         'Proteja o Core contra as ameaças digitais.',
         {
+          fontFamily: FONT_UI,
           fontSize: '18px',
           color: '#cbd5e1'
         }
@@ -3443,19 +3445,13 @@ export class GameScene extends Phaser.Scene {
         .setOrigin(0.5)
         .setDepth(302);
 
-    const pulseIcon =
-      this.add.image(330, 275, 'pulse')
-        .setDisplaySize(58, 58)
-        .setDepth(302);
-
-    const minerIcon =
-      this.add.image(330, 365, 'miner')
-        .setDisplaySize(58, 58)
-        .setDepth(302);
-
+    // O bloco de instruções é centralizado como um todo: o texto usa
+    // origin (0.5, 0) em x=550 (centro do painel), e os ícones são
+    // posicionados DEPOIS, com base na largura real do texto já
+    // renderizado — nada de coordenadas chutadas.
     const instructions =
       this.add.text(
-        385,
+        550,
         235,
         [
           '1. Selecione um defensor nos cards superiores.',
@@ -3466,11 +3462,32 @@ export class GameScene extends Phaser.Scene {
           'Dica: P ou ESC pausa a partida.'
         ].join('\n'),
         {
+          fontFamily: FONT_UI,
           fontSize: '17px',
           color: '#e2e8f0',
-          lineSpacing: 11
+          lineSpacing: 11,
+          align: 'left'
         }
       )
+        .setOrigin(0.5, 0)
+        .setDepth(302);
+
+    const instructionsLeftEdge =
+      instructions.x -
+      instructions.displayWidth / 2;
+
+    const iconX =
+      instructionsLeftEdge -
+      44;
+
+    const pulseIcon =
+      this.add.image(iconX, 275, 'pulse')
+        .setDisplaySize(52, 52)
+        .setDepth(302);
+
+    const minerIcon =
+      this.add.image(iconX, 375, 'miner')
+        .setDisplaySize(52, 52)
         .setDepth(302);
 
     const startButton =
@@ -3493,7 +3510,8 @@ export class GameScene extends Phaser.Scene {
         535,
         'INICIAR DEFESA',
         {
-          fontSize: '22px',
+          fontFamily: FONT_DISPLAY,
+          fontSize: '18px',
           color: '#ffffff',
           fontStyle: 'bold'
         }
@@ -4252,12 +4270,18 @@ export class GameScene extends Phaser.Scene {
   }
 
   private getEnemyEnergyReward(
-    _enemy: Enemy
+    enemy: Enemy
   ) {
-    // Recompensa fixa por abate para todos os tipos de inimigo —
-    // a economia principal agora vem do Miner e do bônus de onda,
-    // não de farmar abates.
-    return 5;
+    if (enemy instanceof Trojan) {
+      return 20;
+    }
+
+    if (enemy instanceof Worm) {
+      return 15;
+    }
+
+    // Malware (Enemy genérico).
+    return 10;
   }
 
   private createEnemyRewardEffect(
