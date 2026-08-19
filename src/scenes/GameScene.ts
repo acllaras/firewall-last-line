@@ -161,44 +161,45 @@ export class GameScene extends Phaser.Scene {
   }
 
   preload() {
+    const base = import.meta.env.BASE_URL;
     this.load.image(
       'pulse',
-      '/assets/defenders/pulse.png'
+      `${base}/assets/defenders/pulse.png`
     );
 
     this.load.image(
       'miner',
-      '/assets/defenders/miner.png'
+      `${base}/assets/defenders/miner.png`
     );
 
     this.load.image(
       'firewall',
-      '/assets/defenders/firewall.png'
+      `${base}/assets/defenders/firewall.png`
     );
 
     this.load.image(
       'cryo',
-      '/assets/defenders/cryo.png'
+      `${base}/assets/defenders/cryo.png`
     );
 
     this.load.image(
       'tesla',
-      '/assets/defenders/tesla.png'
+      `${base}/assets/defenders/tesla.png`
     );
 
     this.load.image(
       'malware',
-      '/assets/enemies/malware.png'
+      `${base}/assets/enemies/malware.png`
     );
 
     this.load.image(
       'worm',
-      '/assets/enemies/worm.png'
+      `${base}/assets/enemies/worm.png`
     );
 
     this.load.image(
       'trojan',
-      '/assets/enemies/trojan.png'
+      `${base}/assets/enemies/trojan.png`
     );
   }
 
